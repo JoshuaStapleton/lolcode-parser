@@ -1,3 +1,2 @@
-Look at this for help 
-https://github.com/textX/Arpeggio/blob/master/examples/simple/simple.py
-
+To run parser.py use commands:
+python parser.py --input greet.lols  / python parser.py --input simple.lols 
