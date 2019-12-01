@@ -28,100 +28,73 @@ def declaration():
     return [(simple_declaration, decl_assignment), simple_declaration]
 
 def simple_declaration():
-    return "I", "HAZ", "A", label
+    return _(r'I'), _(r'HAZ'),_(r'A'), label
 
 def decl_assignment():
-    return "ITZ", value
+    return _(r'ITZ'), value
 
 def value():
-    return ["WIN", 
-    "FAIL", "NOOB", 
+    return [_(r'WIN'), 
+    _(r'FAIL'), _(r'NOOB'), 
     float_literal,
     integer_literal, 
     string_literal]
 
 def integer_literal():
     return _(r'\d+')
-
 def float_literal():
     return _(r'\d*\.\d*')
-
 def string_literal():
-    return '"', ZeroOrMore(string_body), '"'
-
+    return _(r'"'), ZeroOrMore(string_body), _(r'"')
 def comment():
     return [comment1]
-
 def comment1():
     return _(r'BTW'), ZeroOrMore(string_body)
-
-def string_body():
-    return _(r'[^\s"]+')
-
-
+def string_body():  
+    return _(r'[^\s"]+')        
 def print_block():
-    return "VISIBLE", ZeroOrMore(expression), "MKAY?"
-
+    return _(r'VISIBLE'), ZeroOrMore(expression), _(r'MKAY?')
 def input_block():
-    return "GIMMEH", label
-
+    return _(r'GIMMEH'), label
 def assignment():
-    return label, "R", expression
-
+    return label, _(r'R'), expression
 def expression():
-    return [equals, both, not_equals, greater, less, add, sub, mul, div, mod, either,not_rule, label, atom]
-
+    return [equals, both, not_equals, greater, less, add, sub, mul, div, mod, either,label, atom]
 def equals():
-    return "BOTH", "SAEM", expression, "AN", expression
-
+    return _(r'BOTH'), _(r'SAEM'), expression, _(r'AN'), expression
 def not_equals():
-    return "DIFFRINT", expression, "AN", expression
-
+    return _(r'DIFFRINT'), expression, _(r'AN'), expression
 def both():
-    return "BOTH", "OF", expression, "AN", expression
-
+    return _(r'BOTH'), _(r'OF'), expression, _(r'AN'), expression
 def either():
-    return "EITHER", "OF", expression, "AN", expression
-
+    return _(r'EITHER'), _(r'OF'), expression, _(r'AN'), expression
 def greater():
-    return "BIGGR", "OF", expression, "AN", expression
-
+    return _(r'BIGGR'), _(r'OF'), expression,_(r'AN'), expression
 def less():
-    return "SMALLR", "OF", expression, "AN", expression
-
+    return _(r'SMALLR'), _(r'OF'), expression,_(r'AN'), expression
 def add():
-    return "SUM", "OF", expression, "AN", expression
-
+    return _(r'SUM'), _(r'OF'), expression, _(r'AN'), expression
 def sub():
-    return "DIFF", "OF", expression, "AN", expression
-
+    return _(r'DIFF'), _(r'OF'), expression, _(r'AN'), expression
 def mul():
-    return "PRODUKT", "OF", expression, "AN", expression
-
+    return _(r'PRODUKT'), _(r'OF'), expression, _(r'AN'), expression
 def div():
-    return "QUOSHUNT", "OF", expression, "AN", expression
-
+    return _(r'QUOSHUNT'), _(r'OF'), expression, _(r'AN'), expression
 def mod():
-    return "MOD", "OF", expression, "AN", expression
-
+    return _(r'MOD'), _(r'OF'), expression, _(r'AN'), expression
 def not_rule():
-    "NOT", expression
-
+    _(r'NOT'), expression
 def label():
     return _(r"\w+")
-
 def atom():
     return value
-
-
 def string():
     return ZeroOrMore(string_body)
-
 def newlines():
     return OneOrMore(nl)
-
 def nl():
-    return [_(r'\n'), _(r',')]
+    return [_(r',')]
+
 
 def main():
     args = argument_parser.parse_args()
@@ -130,11 +103,11 @@ def main():
     content = fp.read()
     fp.close()
     print(content)
+    #content = '"pokemon are"'
     if debug:
         parser = ParserPython(programme, ws='\t\r ', autokwd=True)
         parse_tree = parser.parse(content)
         print(parse_tree)
-        print("True")
     else:
         try:
             print("YAY!!!!")
