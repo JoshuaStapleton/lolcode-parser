@@ -130,7 +130,6 @@ def main():
     content = fp.read()
     fp.close()
     print(content)
-    #content = '"pokemon are"'
     if debug:
         parser = ParserPython(programme, ws='\t\r ', autokwd=True)
         parse_tree = parser.parse(content)
