@@ -11,35 +11,26 @@ argument_parser.add_argument('--debug', action='store_true')
 
 def programme():
     return hai, newlines, code_block, kthnxbye
-
 def hai():
     return _(r'HAI')
-
 def kthnxbye():
     return _(r'KTHNXBYE')
-
 def code_block():
     return [ZeroOrMore((statement, newlines)), statement, newlines]
-
 def statement():
     return [comment, declaration, expression]
-
 def declaration():
     return [(simple_declaration, decl_assignment), simple_declaration]
-
 def simple_declaration():
     return _(r'I'), _(r'HAZ'),_(r'A'), label
-
 def decl_assignment():
     return _(r'ITZ'), value
-
 def value():
     return [_(r'WIN'), 
     _(r'FAIL'), _(r'NOOB'), 
     float_literal,
     integer_literal, 
     string_literal]
-
 def integer_literal():
     return _(r'\d+')
 def float_literal():
@@ -83,7 +74,7 @@ def div():
 def mod():
     return _(r'MOD'), _(r'OF'), expression, _(r'AN'), expression
 def not_rule():
-    _(r'NOT'), expression
+    _(r'NOT'),expression
 def label():
     return _(r"\w+")
 def atom():
@@ -93,7 +84,7 @@ def string():
 def newlines():
     return OneOrMore(nl)
 def nl():
-    return [_(r',')]
+    return _(r'\n')
 
 
 def main():
@@ -103,15 +94,15 @@ def main():
     content = fp.read()
     fp.close()
     print(content)
-    #content = '"pokemon are"'
     if debug:
         parser = ParserPython(programme, ws='\t\r ', autokwd=True)
         parse_tree = parser.parse(content)
         print(parse_tree)
+        print("TRUE")
     else:
         try:
             print("YAY!!!!")
-            print("True")
+            print("TRUE")
         except:
             print(":-(")
             print("False")
